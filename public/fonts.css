@@ -1,0 +1,70 @@
+@font-face {
+  font-family: 'Touche';
+  src: url('/font/Touche-Light-BF642a2ebf8fe16.otf') format('opentype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Touche';
+  src: url('/font/Touche-LightItalic-BF642a2ec047438.otf') format('opentype');
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Touche';
+  src: url('/font/Touche-Regular-BF642a2ebfe9ff0.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Touche';
+  src: url('/font/Touche-RegularItalic-BF642a2ec033edb.otf') format('opentype');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Touche';
+  src: url('/font/Touche-Medium-BF642a2ebfeab7c.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Touche';
+  src: url('/font/Touche-MediumItalic-BF642a2ec043436.otf') format('opentype');
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Touche';
+  src: url('/font/Touche-Semibold-BF642a2ebf682d9.otf') format('opentype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Touche';
+  src: url('/font/Touche-SemiboldItalic-BF642a2ec0356a2.otf') format('opentype');
+  font-weight: 600;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Touche';
+  src: url('/font/Touche-Bold-BF642a2ec04a3ad.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Touche';
+  src: url('/font/Touche-BoldItalic-BF642a2ec0485d7.otf') format('opentype');
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
