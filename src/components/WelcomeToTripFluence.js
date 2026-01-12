@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import CustomDropdown from './CustomDropdown'
+import { countryOptions } from '../utils/countryOptions'
 
 const WelcomeToTripFluence = () => {
     const [role, setRole] = useState('')
@@ -12,13 +13,6 @@ const WelcomeToTripFluence = () => {
         { value: 'agency', label: 'Agency' },
     ]
 
-    const countryOptions = [
-        { value: 'pakistan', label: 'Pakistan' },
-        { value: 'usa', label: 'United States' },
-        { value: 'uk', label: 'United Kingdom' },
-        { value: 'uae', label: 'United Arab Emirates' },
-        { value: 'india', label: 'India' },
-    ]
     return (
         <>
             <div id='welcometotripfluence' className='w-full px-4 sm:px-6 py-10 sm:py-[60px]'>

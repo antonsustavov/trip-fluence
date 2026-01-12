@@ -3,14 +3,7 @@ import UserHeader from "../components/UserHeader";
 import CustomDropdown from "../components/CustomDropdown";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "../supabaseClient";
-
-const countryOptions = [
-  { value: "pakistan", label: "Pakistan" },
-  { value: "usa", label: "United States" },
-  { value: "uk", label: "United Kingdom" },
-  { value: "uae", label: "United Arab Emirates" },
-  { value: "india", label: "India" },
-];
+import { countryOptions, normalizeCountryValue } from "../utils/countryOptions";
 
 const OnboardCreator = () => {
   const navigate = useNavigate();
@@ -57,7 +50,7 @@ const OnboardCreator = () => {
       if (!active || !data) return;
       setFirstName(data.first_nmae || "");
       setLastName(data.last_name || "");
-      setCountry(data.country || "");
+      setCountry(normalizeCountryValue(data.country || ""));
       setCity(data.city || "");
       setDescription(data.description || "");
       setInstaLink(data.insta_link || "");
