@@ -77,7 +77,11 @@ const UserHeader = () => {
   const onOnboardCreator = location.pathname === "/onboard-creator";
   const onOnboardBrand = location.pathname === "/onboard-brand";
   const hideCollabAndMessages =
-    !isVerified && (onOnboardCreator || onOnboardBrand);
+    !isVerified &&
+    (onOnboardCreator ||
+      onOnboardBrand ||
+      onCreatorAccount ||
+      onBrandAccount);
 
   useEffect(() => {
     if (onFindBrands) {
