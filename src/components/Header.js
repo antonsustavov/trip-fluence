@@ -15,7 +15,6 @@ const Header = () => {
                         <a href="/signup?role=brand&next=%2Ffind-creators" className="px-6 py-3 text-[#05162A] text-[16px] font-medium leading-[24px]">Find Creators</a>
                         <a href="/signup?role=creator&next=%2Ffind-brands" className="px-6 py-3 text-[#05162A] text-[16px] font-medium leading-[24px]">Find Brands</a>
                     </div>
-                    <a href="#welcometotripfluence" className="hover:bg-[#4272EE] transition-colors duration-300 bg-[#5383FF] rounded-lg h-[48px] px-6 text-white text-[16px] pt-0.5 font-semibold flex items-center justify-center">Join Now</a>
                 </nav>
 
                 <button
@@ -41,7 +40,6 @@ const Header = () => {
                         <div className="flex flex-col">
                             <a href="/signup?role=brand&next=%2Ffind-creators" className="py-3 text-[#05162A] text-[16px] font-medium leading-[24px]">Find Creators</a>
                             <a href="/signup?role=creator&next=%2Ffind-brands" className="py-3 text-[#05162A] text-[16px] font-medium leading-[24px]">Find Brands</a>
-                            <a href="#welcometotripfluence" className="mt-2 hover:bg-[#4272EE] transition-colors duration-300 bg-[#5383FF] rounded-lg h-[44px] px-5 text-white text-[16px] pt-0.5 font-semibold flex items-center justify-center">Join Now</a>
                         </div>
                     </div>
                 </div>
