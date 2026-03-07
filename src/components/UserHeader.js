@@ -8,6 +8,7 @@ const UserHeader = () => {
   const btnWrapRef = useRef(null);
   const desktopMenuRef = useRef(null);
   const mobileMenuRef = useRef(null);
+  const [isVerified, setIsVerified] = useState(false);
 
   const navigate = useNavigate();
 
@@ -30,11 +31,12 @@ const UserHeader = () => {
         if (!userId) return;
         const { data: profile } = await supabase
           .from("users")
-          .select("first_nmae, last_name, role")
+          .select("first_nmae, last_name, role, is_verified")
           .eq("auth_id", userId)
           .maybeSingle();
         if (!active) return;
         if (profile) {
+          setIsVerified(!!profile.is_verified);
           const first = (profile.first_nmae || "").trim();
           const last = (profile.last_name || "").trim();
           const full = [first, last].filter(Boolean).join(" ");
@@ -72,6 +74,10 @@ const UserHeader = () => {
   const onChat = location.pathname === "/chat";
   const onCreatorAccount = location.pathname === "/creater-account";
   const onBrandAccount = location.pathname === "/brands-account";
+  const onOnboardCreator = location.pathname === "/onboard-creator";
+  const onOnboardBrand = location.pathname === "/onboard-brand";
+  const hideCollabAndMessages =
+    !isVerified && (onOnboardCreator || onOnboardBrand);
 
   useEffect(() => {
     if (onFindBrands) {
@@ -233,18 +239,22 @@ const UserHeader = () => {
                     >
                       Account
                     </a>
-                    <a
-                      href={collabTarget}
-                      className="py-3 text-[#05162A] text-[16px] font-medium leading-[24px]"
-                    >
-                      {collabLabel}
-                    </a>
-                    <a
-                      href="/chat"
-                      className="py-3 text-[#05162A] text-[16px] font-medium leading-[24px]"
-                    >
-                      Messages
-                    </a>
+                    {!hideCollabAndMessages && showCollab && (
+                      <a
+                        href={collabTarget}
+                        className="py-3 text-[#05162A] text-[16px] font-medium leading-[24px]"
+                      >
+                        {collabLabel}
+                      </a>
+                    )}
+                    {!hideCollabAndMessages && (
+                      <a
+                        href="/chat"
+                        className="py-3 text-[#05162A] text-[16px] font-medium leading-[24px]"
+                      >
+                        Messages
+                      </a>
+                    )}
                     <button
                       onClick={handleLogout}
                       className="text-left py-3 text-[#E11D48] text-[16px] font-medium leading-[24px]"
@@ -280,18 +290,22 @@ const UserHeader = () => {
               >
                 Account
               </a>
-              <a
-                href={collabTarget}
-                className="py-3 text-[#05162A] text-[16px] font-medium leading-[24px]"
-              >
-                {collabLabel}
-              </a>
-              <a
-                href="/chat"
-                className="py-3 text-[#05162A] text-[16px] font-medium leading-[24px]"
-              >
-                Messages
-              </a>
+              {!hideCollabAndMessages && showCollab && (
+                <a
+                  href={collabTarget}
+                  className="py-3 text-[#05162A] text-[16px] font-medium leading-[24px]"
+                >
+                  {collabLabel}
+                </a>
+              )}
+              {!hideCollabAndMessages && (
+                <a
+                  href="/chat"
+                  className="py-3 text-[#05162A] text-[16px] font-medium leading-[24px]"
+                >
+                  Messages
+                </a>
+              )}
               <button
                 onClick={handleLogout}
                 className="text-left py-3 text-[#E11D48] text-[16px] font-medium leading-[24px]"
