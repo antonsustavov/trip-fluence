@@ -11,9 +11,12 @@ const SocialCard = ({
   linkLabel,
   followerLabel,
   metric3Label,
-  reached,
-  engaged,
-  total,
+  reachedValue,
+  onReachedChange,
+  engagedValue,
+  onEngagedChange,
+  totalValue,
+  onTotalChange,
   linkValue,
   onLinkChange,
   followersValue,
@@ -55,28 +58,52 @@ const SocialCard = ({
         Reels Engagement
       </h3>
       <div className="w-full flex items-center justify-between gap-4">
-        <h3 className="text-[#05162A] text-[16px] leading-[24px] font-normal">
+        <h3 className="text-[#05162A] text-[16px] leading-[24px] font-normal whitespace-nowrap">
           Accounts Reached
         </h3>
-        <h3 className="text-[#05162A] text-[16px] leading-[24px] font-normal">
-          {reached}
-        </h3>
+        {readOnly ? (
+          <span className="text-[#05162A] text-[16px] leading-[24px] font-normal">{reachedValue}</span>
+        ) : (
+          <input
+            type="text"
+            placeholder="e.g. 6,504"
+            value={reachedValue || ""}
+            onChange={(e) => onReachedChange?.(e.target.value)}
+            className="border border-[#05588E29] outline-none bg-white rounded-lg py-1.5 px-3 text-[16px] leading-[24px] font-normal w-32 text-right placeholder:text-[#758599]"
+          />
+        )}
       </div>
       <div className="w-full flex items-center justify-between gap-4">
-        <h3 className="text-[#05162A] text-[16px] leading-[24px] font-normal">
+        <h3 className="text-[#05162A] text-[16px] leading-[24px] font-normal whitespace-nowrap">
           Accounts Engaged
         </h3>
-        <h3 className="text-[#05162A] text-[16px] leading-[24px] font-normal">
-          {engaged}
-        </h3>
+        {readOnly ? (
+          <span className="text-[#05162A] text-[16px] leading-[24px] font-normal">{engagedValue}</span>
+        ) : (
+          <input
+            type="text"
+            placeholder="e.g. 304"
+            value={engagedValue || ""}
+            onChange={(e) => onEngagedChange?.(e.target.value)}
+            className="border border-[#05588E29] outline-none bg-white rounded-lg py-1.5 px-3 text-[16px] leading-[24px] font-normal w-32 text-right placeholder:text-[#758599]"
+          />
+        )}
       </div>
       <div className="w-full flex items-center justify-between gap-4">
-        <h3 className="text-[#05162A] text-[16px] leading-[24px] font-normal">
+        <h3 className="text-[#05162A] text-[16px] leading-[24px] font-normal whitespace-nowrap">
           {metric3Label}
         </h3>
-        <h3 className="text-[#05162A] text-[16px] leading-[24px] font-normal">
-          {total}
-        </h3>
+        {readOnly ? (
+          <span className="text-[#05162A] text-[16px] leading-[24px] font-normal">{totalValue}</span>
+        ) : (
+          <input
+            type="text"
+            placeholder="e.g. 12,450"
+            value={totalValue || ""}
+            onChange={(e) => onTotalChange?.(e.target.value)}
+            className="border border-[#05588E29] outline-none bg-white rounded-lg py-1.5 px-3 text-[16px] leading-[24px] font-normal w-32 text-right placeholder:text-[#758599]"
+          />
+        )}
       </div>
     </div>
   </div>
@@ -117,6 +144,15 @@ const CreaterAccount = () => {
   const [youtubeFollower, setYoutubeFollower] = useState(qs.get("ytSubscribers") || "");
   const [tiktokLink, setTiktokLink] = useState(qs.get("ttLink") || "");
   const [tiktokFollower, setTiktokFollower] = useState(qs.get("ttFollowers") || "");
+  const [igReached, setIgReached] = useState("");
+  const [igEngaged, setIgEngaged] = useState("");
+  const [igTotal, setIgTotal] = useState("");
+  const [ytReached, setYtReached] = useState("");
+  const [ytEngaged, setYtEngaged] = useState("");
+  const [ytTotal, setYtTotal] = useState("");
+  const [ttReached, setTtReached] = useState("");
+  const [ttEngaged, setTtEngaged] = useState("");
+  const [ttTotal, setTtTotal] = useState("");
 
   const [authId, setAuthId] = useState("");
   const [email, setEmail] = useState("");
@@ -155,6 +191,15 @@ const CreaterAccount = () => {
           setYoutubeFollower(data.youtube_follower || "");
           setTiktokLink(data.tiktok_link || "");
           setTiktokFollower(data.tiktok_follower || "");
+          setIgReached(data.ig_reached || "");
+          setIgEngaged(data.ig_engaged || "");
+          setIgTotal(data.ig_total || "");
+          setYtReached(data.yt_reached || "");
+          setYtEngaged(data.yt_engaged || "");
+          setYtTotal(data.yt_total || "");
+          setTtReached(data.tt_reached || "");
+          setTtEngaged(data.tt_engaged || "");
+          setTtTotal(data.tt_total || "");
           if (data.avatar) setAvatarUrl(data.avatar);
         }
         return;
@@ -183,6 +228,15 @@ const CreaterAccount = () => {
         setYoutubeFollower(data.youtube_follower || "");
         setTiktokLink(data.tiktok_link || "");
         setTiktokFollower(data.tiktok_follower || "");
+        setIgReached(data.ig_reached || "");
+        setIgEngaged(data.ig_engaged || "");
+        setIgTotal(data.ig_total || "");
+        setYtReached(data.yt_reached || "");
+        setYtEngaged(data.yt_engaged || "");
+        setYtTotal(data.yt_total || "");
+        setTtReached(data.tt_reached || "");
+        setTtEngaged(data.tt_engaged || "");
+        setTtTotal(data.tt_total || "");
         if (data.avatar) setAvatarUrl(data.avatar);
       }
     }
@@ -218,29 +272,6 @@ const CreaterAccount = () => {
     };
   }, [authId, email]);
 
-  const socials = {
-    ig: {
-      link: qs.get("igLink") || "",
-      followers: qs.get("igFollowers") || "",
-      reached: qs.get("igReached") || "",
-      engaged: qs.get("igEngaged") || "",
-      total: qs.get("igTotal") || "",
-    },
-    yt: {
-      link: qs.get("ytLink") || "",
-      followers: qs.get("ytSubscribers") || "",
-      reached: qs.get("ytReached") || "",
-      engaged: qs.get("ytEngaged") || "",
-      total: qs.get("ytTotal") || "",
-    },
-    tt: {
-      link: qs.get("ttLink") || "",
-      followers: qs.get("ttFollowers") || "",
-      reached: qs.get("ttReached") || "",
-      engaged: qs.get("ttEngaged") || "",
-      total: qs.get("ttTotal") || "",
-    },
-  };
 
   const servicesOptions = [
     { value: "creator", label: "Creator" },
@@ -404,9 +435,12 @@ const CreaterAccount = () => {
                   linkLabel: "Instagram Link",
                   followerLabel: "Followers Number",
                   metric3Label: "Total Followers",
-                  reached: socials.ig.reached || "6,504",
-                  engaged: socials.ig.engaged || "304",
-                  total: socials.ig.total || "12,450",
+                  reachedValue: igReached,
+                  onReachedChange: setIgReached,
+                  engagedValue: igEngaged,
+                  onEngagedChange: setIgEngaged,
+                  totalValue: igTotal,
+                  onTotalChange: setIgTotal,
                   linkValue: instaLink,
                   followersValue: instaFollower,
                   onLinkChange: setInstaLink,
@@ -417,9 +451,12 @@ const CreaterAccount = () => {
                   linkLabel: "Youtube Link",
                   followerLabel: "Subscribers Number",
                   metric3Label: "Total Subscribers",
-                  reached: socials.yt.reached || "8,920",
-                  engaged: socials.yt.engaged || "510",
-                  total: socials.yt.total || "7,300",
+                  reachedValue: ytReached,
+                  onReachedChange: setYtReached,
+                  engagedValue: ytEngaged,
+                  onEngagedChange: setYtEngaged,
+                  totalValue: ytTotal,
+                  onTotalChange: setYtTotal,
                   linkValue: youtubeLink,
                   followersValue: youtubeFollower,
                   onLinkChange: setYoutubeLink,
@@ -430,9 +467,12 @@ const CreaterAccount = () => {
                   linkLabel: "TikTok Link",
                   followerLabel: "Followers Number",
                   metric3Label: "Total Followers",
-                  reached: socials.tt.reached || "15,204",
-                  engaged: socials.tt.engaged || "1,104",
-                  total: socials.tt.total || "24,900",
+                  reachedValue: ttReached,
+                  onReachedChange: setTtReached,
+                  engagedValue: ttEngaged,
+                  onEngagedChange: setTtEngaged,
+                  totalValue: ttTotal,
+                  onTotalChange: setTtTotal,
                   linkValue: tiktokLink,
                   followersValue: tiktokFollower,
                   onLinkChange: setTiktokLink,
@@ -552,6 +592,15 @@ const CreaterAccount = () => {
                         youtube_follower: youtubeFollower || null,
                         tiktok_link: tiktokLink || null,
                         tiktok_follower: tiktokFollower || null,
+                        ig_reached: igReached || null,
+                        ig_engaged: igEngaged || null,
+                        ig_total: igTotal || null,
+                        yt_reached: ytReached || null,
+                        yt_engaged: ytEngaged || null,
+                        yt_total: ytTotal || null,
+                        tt_reached: ttReached || null,
+                        tt_engaged: ttEngaged || null,
+                        tt_total: ttTotal || null,
                       })
                       .eq(identifier.column, identifier.value);
                     if (updateErr) throw updateErr;
