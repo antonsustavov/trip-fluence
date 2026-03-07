@@ -131,7 +131,7 @@ const OnboardBrand = () => {
             </div>
             <div className='flex flex-col gap-2'>
               <label className='text-[#05162A] text-[16px] leading-[24px] font-normal'>City</label>
-              <CustomDropdown options={cityOptions} value={city} onChange={setCity} placeholder='Select' />
+              <input type='text' value={city} onChange={(e) => setCity(e.target.value)} placeholder='City...' className='border border-[#05588E29] outline-none bg-white rounded-lg py-3 px-4 text-[16px] leading-[24px] font-normal placeholder:text-[#758599]' />
             </div>
             <div className='flex flex-col gap-2'>
               <label className='text-[#05162A] text-[16px] leading-[24px] font-normal'>Profile picture</label>
