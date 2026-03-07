@@ -80,11 +80,11 @@ const OnboardCreator = () => {
       console.log("avatarFile", avatarFile);
       if (avatarFile) {
         const ext = (avatarFile.name.split(".").pop() || "png").toLowerCase();
-        const ownerKey = "public";
-        const filePath = `public/${ownerKey}-${Date.now()}.${ext}`;
+        const ownerKey = authUserId || "anon";
+        const filePath = `${ownerKey}-${Date.now()}.${ext}`;
         const { error: upErr } = await supabase.storage
           .from("avatars")
-          .upload(filePath, avatarFile, );
+          .upload(filePath, avatarFile, { upsert: true });
         if (upErr) throw upErr;
         const { data: pub } = supabase.storage
           .from("avatars")

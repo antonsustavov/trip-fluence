@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useEffect, useState } from "react";
 import UserHeader from "../components/UserHeader";
 import CustomDropdown from "../components/CustomDropdown";
 import { useLocation, useParams, Link, useNavigate } from "react-router-dom";
@@ -118,19 +118,18 @@ const CreaterAccount = () => {
   const [tiktokLink, setTiktokLink] = useState(qs.get("ttLink") || "");
   const [tiktokFollower, setTiktokFollower] = useState(qs.get("ttFollowers") || "");
 
-  const authId = useMemo(() => {
-    try {
-      return localStorage.getItem("auth_id") || "";
-    } catch {
-      return "";
+  const [authId, setAuthId] = useState("");
+  const [email, setEmail] = useState("");
+
+  useEffect(() => {
+    async function loadAuth() {
+      const { data } = await supabase.auth.getUser();
+      if (data?.user) {
+        setAuthId(data.user.id || "");
+        setEmail(data.user.email || "");
+      }
     }
-  }, []);
-  const email = useMemo(() => {
-    try {
-      return localStorage.getItem("user_email") || "";
-    } catch {
-      return "";
-    }
+    loadAuth();
   }, []);
 
   useEffect(() => {
