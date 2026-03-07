@@ -130,12 +130,12 @@ const FindCreators = () => {
         const { data, error } = await supabase
           .from('users')
           .select('id, first_nmae, last_name, country, avatar, brand_url, description, role')
-          .eq('role', 'brand')
+          .eq('role', 'creator')
         if (error) return
         if (!active || !data) return
         const normalized = (data || []).map((u) => ({
           id: u.id,
-          accountType: 'brand',
+          accountType: 'creator',
           title: `${(u.first_nmae || '').trim()} ${(u.last_name || '').trim()}`.trim() || 'Brand',
           location: (u.country || '').toUpperCase(),
           image: u.avatar || '/assets/collab-1.jpg',
@@ -164,7 +164,7 @@ const FindCreators = () => {
           <h1 className="text-center text-[#05162A] text-[28px] sm:text-[40px] lg:text-[48px] leading-[36px] sm:leading-[48px] lg:leading-[67px] font-semibold">Find Travel Collabs For The Next Trips</h1>
           <div className="mt-10 md:mt-[56px] justify-items-center grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 md:gap-8 lg:gap-x-[44.67px] lg:gap-y-[56.5px]">
             {dataToRender.map((item) => {
-              const href = `/brands-account/${item.id}`
+              const href = `/creater-account/${item.id}`
               return <Card key={item.id} item={item} href={href} />
             })}
           </div>

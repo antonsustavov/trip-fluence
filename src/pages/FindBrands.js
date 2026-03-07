@@ -74,12 +74,12 @@ const FindBrands = () => {
         const { data, error } = await supabase
           .from('users')
           .select('id, first_nmae, last_name, country, avatar, description, role')
-          .eq('role', 'creator')
+          .eq('role', 'brand')
         if (error) return
         if (!active || !data) return
         const normalized = (data || []).map((u) => ({
           id: u.id,
-          accountType: 'creator',
+          accountType: 'brand',
           title: `${(u.first_nmae || '').trim()} ${(u.last_name || '').trim()}`.trim() || 'CREATOR',
           location: (u.country || '').toUpperCase(),
           image: u.avatar || '/assets/collab-5.jpg',
@@ -105,7 +105,7 @@ const FindBrands = () => {
       <UserHeader />
       <main className="px-4 md:px-6 py-10 md:py-[60px]">
         <div className="max-w-[1090px] mx-auto">
-          <h1 className="text-center text-[#05162A] text-[28px] sm:text-[35px] lg:text-[41px] leading-[36px] sm:leading-[46px] lg:leading-[57px] font-semibold">Find Authentic Creators For New Content and Promo </h1>
+          <h1 className="text-center text-[#05162A] text-[28px] sm:text-[35px] lg:text-[41px] leading-[36px] sm:leading-[46px] lg:leading-[57px] font-semibold">Find Authentic Brands For New Content and Promo</h1>
           <div className="mt-10 md:mt-[56px] justify-items-center grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 md:gap-8 lg:gap-x-[44.67px] lg:gap-y-[56.5px]">
             {dataToRender.map((item) => {
               const base = item.accountType === 'brand' ? '/brands-account' : '/creater-account'
