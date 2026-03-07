@@ -1,7 +1,6 @@
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 import Hero from "./components/Hero";
-import WelcomeToTripFluence from "./components/WelcomeToTripFluence";
 import WhatsNext from "./components/WhatsNext";
 import WhyTripFluence from "./components/WhyTripFluence";
 import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from "react-router-dom";
@@ -114,7 +113,6 @@ function App() {
               <ForTravelCreators/>
               <HowItWorks/>
               <WhatsNext />
-              <WelcomeToTripFluence />
               <Footer />
             </>
           }
