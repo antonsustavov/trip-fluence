@@ -141,9 +141,9 @@ const UserHeader = () => {
     : onChat && lastCollab === "creators"
     ? "/find-creators"
     : onBrandAccount
-    ? "/find-brands"
-    : onCreatorAccount
     ? "/find-creators"
+    : onCreatorAccount
+    ? "/find-brands"
     : isBrand
     ? "/find-creators"
     : "/find-brands";
@@ -157,9 +157,9 @@ const UserHeader = () => {
     : onChat && lastCollab === "creators"
     ? "Collab Creaters"
     : onBrandAccount
-    ? "Collab Brands"
-    : onCreatorAccount
     ? "Collab Creaters"
+    : onCreatorAccount
+    ? "Collab Brands"
     : isBrand
     ? "Collab Creaters"
     : "Collab Brands";
