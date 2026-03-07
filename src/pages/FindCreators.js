@@ -136,7 +136,7 @@ const FindCreators = () => {
         const normalized = (data || []).map((u) => ({
           id: u.id,
           accountType: 'creator',
-          title: `${(u.first_nmae || '').trim()} ${(u.last_name || '').trim()}`.trim() || 'Brand',
+          title: `${(u.first_nmae || '').trim()} ${(u.last_name || '').trim()}`.trim() || 'Creator',
           location: (u.country || '').toUpperCase(),
           image: u.avatar || '/assets/collab-1.jpg',
           firstName: u.first_nmae || '',
@@ -161,7 +161,7 @@ const FindCreators = () => {
       <UserHeader />
       <main className="px-4 md:px-6 py-10 sm:py-[60px]">
         <div className="max-w-[1070px] mx-auto">
-          <h1 className="text-center text-[#05162A] text-[28px] sm:text-[40px] lg:text-[48px] leading-[36px] sm:leading-[48px] lg:leading-[67px] font-semibold">Find Travel Collabs For The Next Trips</h1>
+          <h1 className="text-center text-[#05162A] text-[28px] sm:text-[40px] lg:text-[48px] leading-[36px] sm:leading-[48px] lg:leading-[67px] font-semibold">Find Authentic Creators</h1>
           <div className="mt-10 md:mt-[56px] justify-items-center grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 md:gap-8 lg:gap-x-[44.67px] lg:gap-y-[56.5px]">
             {dataToRender.map((item) => {
               const href = `/creater-account/${item.id}`

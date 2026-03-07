@@ -238,11 +238,12 @@ const BrandsAccount = () => {
                   <label className="text-[#05162A] text-[16px] leading-[24px] font-normal">
                     City
                   </label>
-                  <CustomDropdown
-                    options={cityOptions}
+                  <input
+                    type="text"
                     value={city}
-                    onChange={() => {}}
-                    placeholder="Select"
+                    readOnly
+                    placeholder="City..."
+                    className="border border-[#05588E29] outline-none bg-white rounded-lg py-3 sm:py-4 px-4 sm:px-6 text-[16px] leading-[24px] font-normal placeholder:text-[#758599]"
                   />
                 </div>
               </div>
