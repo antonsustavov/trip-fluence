@@ -45,6 +45,60 @@ function RequireAuth({ children }) {
   return <Navigate to={`/login?next=${next}`} replace />;
 }
 
+function RequireRole({ children, role }) {
+  const location = useLocation();
+  const [status, setStatus] = useState('loading');
+  const [userRole, setUserRole] = useState('');
+
+  useEffect(() => {
+    let active = true;
+    async function loadRole(session) {
+      if (!session?.user?.id) {
+        setUserRole('');
+        setStatus('unauth');
+        return;
+      }
+      const { data } = await supabase
+        .from('users')
+        .select('role')
+        .eq('auth_id', session.user.id)
+        .maybeSingle();
+      if (!active) return;
+      setUserRole(data?.role || '');
+      setStatus('authed');
+    }
+    async function getInitial() {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (!active) return;
+      await loadRole(session);
+    }
+    getInitial();
+    const { data: subscription } = supabase.auth.onAuthStateChange(async (_event, session) => {
+      if (!active) return;
+      await loadRole(session);
+    });
+    return () => { active = false; subscription?.subscription?.unsubscribe?.(); };
+  }, []);
+
+  if (status === 'loading') return null;
+  if (status === 'unauth') {
+    const next = encodeURIComponent(location.pathname + location.search);
+    return <Navigate to={`/login?next=${next}`} replace />;
+  }
+  if (!userRole || userRole === role) return children;
+
+  const isOnboardingPath = location.pathname.startsWith('/onboard-');
+  const redirectTarget = isOnboardingPath
+    ? userRole === 'brand'
+      ? '/onboard-brand'
+      : '/onboard-creator'
+    : userRole === 'brand'
+    ? '/brands-account'
+    : '/creater-account';
+
+  return <Navigate to={redirectTarget} replace />;
+}
+
 function App() {
   return (
     <Router>
@@ -67,14 +121,14 @@ function App() {
         />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
-        <Route path="/find-creators" element={<RequireAuth><FindCreators /></RequireAuth>} />
-        <Route path="/find-brands" element={<RequireAuth><FindBrands /></RequireAuth>} />
-        <Route path="/onboard-creator" element={<RequireAuth><OnboardCreator /></RequireAuth>} />
-        <Route path="/onboard-brand" element={<RequireAuth><OnboardBrand /></RequireAuth>} />
-        <Route path="/creater-account" element={<RequireAuth><CreaterAccount /></RequireAuth>} />
-        <Route path="/creater-account/:id" element={<RequireAuth><CreaterAccount /></RequireAuth>} />
-        <Route path="/brands-account" element={<RequireAuth><BrandsAccount /></RequireAuth>} />
-        <Route path="/brands-account/:id" element={<RequireAuth><BrandsAccount /></RequireAuth>} />
+        <Route path="/find-creators" element={<RequireRole role="brand"><FindCreators /></RequireRole>} />
+        <Route path="/find-brands" element={<RequireRole role="creator"><FindBrands /></RequireRole>} />
+        <Route path="/onboard-creator" element={<RequireRole role="creator"><OnboardCreator /></RequireRole>} />
+        <Route path="/onboard-brand" element={<RequireRole role="brand"><OnboardBrand /></RequireRole>} />
+        <Route path="/creater-account" element={<RequireRole role="creator"><CreaterAccount /></RequireRole>} />
+        <Route path="/creater-account/:id" element={<RequireRole role="creator"><CreaterAccount /></RequireRole>} />
+        <Route path="/brands-account" element={<RequireRole role="brand"><BrandsAccount /></RequireRole>} />
+        <Route path="/brands-account/:id" element={<RequireRole role="brand"><BrandsAccount /></RequireRole>} />
         <Route path="/chat" element={<RequireAuth><Chat /></RequireAuth>} />
       </Routes>
     </Router>

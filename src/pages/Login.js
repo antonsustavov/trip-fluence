@@ -7,6 +7,12 @@ const Login = () => {
   const { search } = useLocation()
   const params = new URLSearchParams(search)
   const next = params.get('next') || '/'
+  const explicitRole = params.get('role')
+  const roleFromNext = next.includes('brands-account') || next.includes('find-creators') ? 'brand' : (next.includes('creater-account') || next.includes('find-brands') ? 'creator' : '')
+  const role = explicitRole || roleFromNext
+  const signupHref = role
+    ? `/signup?role=${encodeURIComponent(role)}&next=${encodeURIComponent(next)}`
+    : `/signup?next=${encodeURIComponent(next)}`
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -76,7 +82,7 @@ const Login = () => {
             <button type='submit' className='w-full hover:bg-[#2A3B6D] transition-colors duration-300 bg-[#1B2B5D] text-white text-[13px] sm:text-[16px] pt-1 sm:pt-0.5 font-semibold h-10 sm:h-12 px-4 sm:px-6 rounded-lg'>Log in</button>
           </form>
           <div className='mt-4 text-[16px] text-center'>
-            I don’t have account <Link to={`/signup?next=${encodeURIComponent(next)}`} className='font-semibold underline'>sign up</Link>
+            I don’t have account <Link to={signupHref} className='font-semibold underline'>sign up</Link>
           </div>
         </div>
       </main>

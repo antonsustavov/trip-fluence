@@ -12,8 +12,8 @@ const Header = () => {
 
                 <nav className="hidden md:flex items-center gap-8">
                     <div className='flex items-center'>
-                        <a href="/creater-account" className="px-6 py-3 text-[#05162A] text-[16px] font-medium leading-[24px]">Find Creators</a>
-                        <a href="/brands-account" className="px-6 py-3 text-[#05162A] text-[16px] font-medium leading-[24px]">Find Brands</a>
+                        <a href="/signup?role=brand&next=%2Ffind-creators" className="px-6 py-3 text-[#05162A] text-[16px] font-medium leading-[24px]">Find Creators</a>
+                        <a href="/signup?role=creator&next=%2Ffind-brands" className="px-6 py-3 text-[#05162A] text-[16px] font-medium leading-[24px]">Find Brands</a>
                     </div>
                     <a href="#welcometotripfluence" className="hover:bg-[#4272EE] transition-colors duration-300 bg-[#5383FF] rounded-lg h-[48px] px-6 text-white text-[16px] pt-0.5 font-semibold flex items-center justify-center">Join Now</a>
                 </nav>
@@ -39,8 +39,8 @@ const Header = () => {
                 <div className="md:hidden absolute z-50 left-0 right-0 top-full bg-white border-t border-black/10 shadow-sm">
                     <div className="max-w-[1280px] mx-auto px-4 py-3">
                         <div className="flex flex-col">
-                            <a href="/creater-account" className="py-3 text-[#05162A] text-[16px] font-medium leading-[24px]">Find Creators</a>
-                            <a href="/brands-account" className="py-3 text-[#05162A] text-[16px] font-medium leading-[24px]">Find Brands</a>
+                            <a href="/signup?role=brand&next=%2Ffind-creators" className="py-3 text-[#05162A] text-[16px] font-medium leading-[24px]">Find Creators</a>
+                            <a href="/signup?role=creator&next=%2Ffind-brands" className="py-3 text-[#05162A] text-[16px] font-medium leading-[24px]">Find Brands</a>
                             <a href="#welcometotripfluence" className="mt-2 hover:bg-[#4272EE] transition-colors duration-300 bg-[#5383FF] rounded-lg h-[44px] px-5 text-white text-[16px] pt-0.5 font-semibold flex items-center justify-center">Join Now</a>
                         </div>
                     </div>

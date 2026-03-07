@@ -24,10 +24,10 @@ const Hero = () => {
                                         Connecting Travel Creators and Brands for meaningful collaborations worldwide.
                                     </p>
                                     <div className="mt-6 sm:mt-8 lg:mt-12 flex flex-wrap items-center gap-3 sm:gap-4">
-                                        <a href="/creater-account" className="hover:bg-[#4272EE] transition-colors duration-300 bg-[#5383FF] text-white text-[13px] sm:text-[16px] pt-1 sm:pt-0.5 font-semibold h-10 sm:h-12 px-4 sm:px-6 rounded-lg flex items-center justify-center">
+                                        <a href="/signup?role=creator&next=%2Fcreater-account" className="hover:bg-[#4272EE] transition-colors duration-300 bg-[#5383FF] text-white text-[13px] sm:text-[16px] pt-1 sm:pt-0.5 font-semibold h-10 sm:h-12 px-4 sm:px-6 rounded-lg flex items-center justify-center">
                                             I am Creator
                                         </a>
-                                        <a href="/brands-account" className="hover:bg-[#2A3B6D] transition-colors duration-300 bg-[#1B2B5D] text-white text-[13px] sm:text-[16px] pt-1 sm:pt-0.5 font-semibold h-10 sm:h-12 px-4 sm:px-6 rounded-lg flex items-center justify-center">
+                                        <a href="/signup?role=brand&next=%2Fbrands-account" className="hover:bg-[#2A3B6D] transition-colors duration-300 bg-[#1B2B5D] text-white text-[13px] sm:text-[16px] pt-1 sm:pt-0.5 font-semibold h-10 sm:h-12 px-4 sm:px-6 rounded-lg flex items-center justify-center">
                                             I am Brand
                                         </a>
                                     </div>

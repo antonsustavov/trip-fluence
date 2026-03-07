@@ -22,10 +22,10 @@ const WhatsNext = () => {
                                 Connecting Travel Creators and Brands for meaningful collaborations worldwide. <span className='font-semibold'>Join us now!</span>
                             </p>
                             <div className="mt-8 sm:mt-10 flex items-center justify-center gap-3 sm:gap-4">
-                                <a href="/creater-account" className="hover:bg-[#4272EE] transition-colors duration-300 bg-[#5383FF] text-white text-sm sm:text-[16px] pt-0.5 font-semibold h-11 sm:h-12 px-5 sm:px-[30px] rounded-lg flex items-center justify-center">
+                                <a href="/signup?role=creator&next=%2Fcreater-account" className="hover:bg-[#4272EE] transition-colors duration-300 bg-[#5383FF] text-white text-sm sm:text-[16px] pt-0.5 font-semibold h-11 sm:h-12 px-5 sm:px-[30px] rounded-lg flex items-center justify-center">
                                     I am Creator
                                 </a>
-                                <a href="/brands-account" className="hover:bg-[#4272EE] transition-colors duration-300 bg-[#5383FF] text-white text-sm sm:text-[16px] pt-0.5 font-semibold h-11 sm:h-12 px-5 sm:px-[30px] rounded-lg flex items-center justify-center">
+                                <a href="/signup?role=brand&next=%2Fbrands-account" className="hover:bg-[#4272EE] transition-colors duration-300 bg-[#5383FF] text-white text-sm sm:text-[16px] pt-0.5 font-semibold h-11 sm:h-12 px-5 sm:px-[30px] rounded-lg flex items-center justify-center">
                                     I am Brand
                                 </a>
                             </div>

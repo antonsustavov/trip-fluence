@@ -16,8 +16,11 @@ const Signup = () => {
 
   // derive role from query params or from the next path (brand/creator)
   const explicitRole = params.get('role')
-  const roleFromNext = next.includes('brands-account') ? 'brand' : (next.includes('creater-account') ? 'creator' : '')
+  const roleFromNext = next.includes('brands-account') || next.includes('find-creators') ? 'brand' : (next.includes('creater-account') || next.includes('find-brands') ? 'creator' : '')
   const role = explicitRole || roleFromNext
+  const loginHref = role
+    ? `/login?role=${encodeURIComponent(role)}&next=${encodeURIComponent(next)}`
+    : `/login?next=${encodeURIComponent(next)}`
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -112,7 +115,7 @@ const Signup = () => {
             <button type='submit' disabled={loading} className='w-full hover:bg-[#2A3B6D] transition-colors duration-300 bg-[#1B2B5D] text-white text-[13px] sm:text-[16px] pt-1 sm:pt-0.5 font-semibold h-10 sm:h-12 px-4 sm:px-6 rounded-lg disabled:opacity-60 disabled:cursor-not-allowed'>{loading ? 'Creating...' : 'Create account'}</button>
           </form>
           <div className='mt-4 text-[16px] text-center'>
-            I already have an account <Link to={`/login?next=${encodeURIComponent(next)}`} className='font-medium underline'> log in</Link>
+            I already have an account <Link to={loginHref} className='font-medium underline'> log in</Link>
           </div>
         </div>
       </main>

@@ -2,8 +2,8 @@ import React from 'react'
 
 const Footer = () => {
     const navLinks = [
-        { href: '/creater-account', label: 'Find Creators' },
-        { href: '/brands-account', label: 'Find Brands' },
+        { href: '/signup?role=brand&next=%2Ffind-creators', label: 'Find Creators' },
+        { href: '/signup?role=creator&next=%2Ffind-brands', label: 'Find Brands' },
         { href: '#howitworks', label: 'How it works' },
         { href: '#welcometotripfluence', label: 'Subscribe' },
         { href: '#welcometotripfluence', label: 'Contact' },
