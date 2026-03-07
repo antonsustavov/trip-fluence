@@ -124,9 +124,9 @@ function App() {
         <Route path="/onboard-creator" element={<RequireRole role="creator"><OnboardCreator /></RequireRole>} />
         <Route path="/onboard-brand" element={<RequireRole role="brand"><OnboardBrand /></RequireRole>} />
         <Route path="/creater-account" element={<RequireRole role="creator"><CreaterAccount /></RequireRole>} />
-        <Route path="/creater-account/:id" element={<RequireRole role="creator"><CreaterAccount /></RequireRole>} />
+        <Route path="/creater-account/:id" element={<RequireAuth><CreaterAccount /></RequireAuth>} />
         <Route path="/brands-account" element={<RequireRole role="brand"><BrandsAccount /></RequireRole>} />
-        <Route path="/brands-account/:id" element={<RequireRole role="brand"><BrandsAccount /></RequireRole>} />
+        <Route path="/brands-account/:id" element={<RequireAuth><BrandsAccount /></RequireAuth>} />
         <Route path="/chat" element={<RequireAuth><Chat /></RequireAuth>} />
       </Routes>
     </Router>

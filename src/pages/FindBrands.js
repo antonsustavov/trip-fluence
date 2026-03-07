@@ -80,7 +80,7 @@ const FindBrands = () => {
         const normalized = (data || []).map((u) => ({
           id: u.id,
           accountType: 'brand',
-          title: `${(u.first_nmae || '').trim()} ${(u.last_name || '').trim()}`.trim() || 'CREATOR',
+          title: `${(u.first_nmae || '').trim()} ${(u.last_name || '').trim()}`.trim() || 'BRAND',
           location: (u.country || '').toUpperCase(),
           image: u.avatar || '/assets/collab-5.jpg',
           firstName: u.first_nmae || '',
