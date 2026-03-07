@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, Link } from "react-router-dom";
 import { supabase } from "../supabaseClient";
 
 const UserHeader = () => {
@@ -237,27 +237,27 @@ const UserHeader = () => {
               >
                 <div className="px-4 py-3">
                   <div className="flex flex-col">
-                    <a
-                      href={accountTarget}
+                    <Link
+                      to={accountTarget}
                       className="py-3 text-[#05162A] text-[16px] font-medium leading-[24px]"
                     >
                       Account
-                    </a>
+                    </Link>
                     {!hideCollabAndMessages && showCollab && (
-                      <a
-                        href={collabTarget}
+                      <Link
+                        to={collabTarget}
                         className="py-3 text-[#05162A] text-[16px] font-medium leading-[24px]"
                       >
                         {collabLabel}
-                      </a>
+                      </Link>
                     )}
                     {!hideCollabAndMessages && (
-                      <a
-                        href="/chat"
+                      <Link
+                        to="/chat"
                         className="py-3 text-[#05162A] text-[16px] font-medium leading-[24px]"
                       >
                         Messages
-                      </a>
+                      </Link>
                     )}
                     <button
                       onClick={handleLogout}
@@ -288,27 +288,27 @@ const UserHeader = () => {
               </h2>
             </div>
             <div className="flex flex-col">
-              <a
-                href={accountTarget}
+              <Link
+                to={accountTarget}
                 className="py-3 text-[#05162A] text-[16px] font-medium leading-[24px]"
               >
                 Account
-              </a>
+              </Link>
               {!hideCollabAndMessages && showCollab && (
-                <a
-                  href={collabTarget}
+                <Link
+                  to={collabTarget}
                   className="py-3 text-[#05162A] text-[16px] font-medium leading-[24px]"
                 >
                   {collabLabel}
-                </a>
+                </Link>
               )}
               {!hideCollabAndMessages && (
-                <a
-                  href="/chat"
+                <Link
+                  to="/chat"
                   className="py-3 text-[#05162A] text-[16px] font-medium leading-[24px]"
                 >
                   Messages
-                </a>
+                </Link>
               )}
               <button
                 onClick={handleLogout}
