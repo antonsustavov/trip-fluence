@@ -1,4 +1,4 @@
-import countries from "world-countries";
+import countries from "world-countries/countries.json";
 
 const EXCLUDED_CCA2 = new Set(["RU", "BY"]); // Russia, Belarus
 
