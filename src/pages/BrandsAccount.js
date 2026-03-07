@@ -4,6 +4,7 @@ import CustomDropdown from "../components/CustomDropdown";
 import { useLocation, useParams, Link, useNavigate } from "react-router-dom";
 import { supabase } from "../supabaseClient";
 import { getOrCreateConversation } from "../utils/conversationUtils";
+import { countryOptions, normalizeCountryValue } from "../utils/countryOptions";
 
 const BrandsAccount = () => {
   const navigate = useNavigate();
@@ -19,7 +20,7 @@ const BrandsAccount = () => {
   };
   const initialFirstName = qs.get("firstName") || "Jane";
   const initialLastName = qs.get("lastName") || "Smith";
-  const initialCountry = qs.get("country") || "usa";
+  const initialCountry = normalizeCountryValue(qs.get("country") || "usa");
   const initialCity = qs.get("city") || "new-york";
   const initialBrandLink = qs.get("brandLink") || "https://example.com/brand";
   const initialDescription =
@@ -47,13 +48,6 @@ const BrandsAccount = () => {
     { value: "delhi", label: "Delhi" },
     { value: "shanghai", label: "Shanghai" },
   ];
-  const baseCountryOptions = [
-    { value: "pakistan", label: "Pakistan" },
-    { value: "usa", label: "United States" },
-    { value: "uk", label: "United Kingdom" },
-    { value: "uae", label: "United Arab Emirates" },
-    { value: "india", label: "India" },
-  ];
   const ensureOption = (opts, val) => {
     if (!val) return opts;
     return opts.some((o) => o.value === val)
@@ -61,10 +55,8 @@ const BrandsAccount = () => {
       : [...opts, { value: val, label: toLabel(val) }];
   };
   const cityOptions = ensureOption(baseCityOptions, city || initialCity);
-  const countryOptions = ensureOption(
-    baseCountryOptions,
-    country || initialCountry
-  );
+  const countryValue = normalizeCountryValue(country || initialCountry);
+  const ensuredCountryOptions = ensureOption(countryOptions, countryValue);
 
   useEffect(() => {
     let active = true;
@@ -77,7 +69,7 @@ const BrandsAccount = () => {
         .maybeSingle();
       if (!active || !data) return;
       setBrandTitle(`${data.first_nmae || ""} ${data.last_name || ""}`.trim());
-      setCountry(data.country || "");
+      setCountry(normalizeCountryValue(data.country || ""));
       setCity(data.city || "");
       setImageUrl(data.avatar || "");
       setBrandLink(data.brand_url || "");
@@ -110,7 +102,7 @@ const BrandsAccount = () => {
         .maybeSingle();
       if (!active || !data) return;
       setBrandTitle(`${data.first_nmae || ""} ${data.last_name || ""}`.trim());
-      setCountry(data.country || "");
+      setCountry(normalizeCountryValue(data.country || ""));
       setCity(data.city || "");
       setImageUrl(data.avatar || "");
       setBrandLink(data.brand_url || "");
@@ -236,8 +228,8 @@ const BrandsAccount = () => {
                     Country
                   </label>
                   <CustomDropdown
-                    options={countryOptions}
-                    value={country}
+                    options={ensuredCountryOptions}
+                    value={countryValue}
                     onChange={() => {}}
                     placeholder="Select"
                   />

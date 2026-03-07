@@ -4,6 +4,7 @@ import CustomDropdown from "../components/CustomDropdown";
 import { useLocation, useParams, Link, useNavigate } from "react-router-dom";
 import { supabase } from "../supabaseClient";
 import { getOrCreateConversation } from "../utils/conversationUtils";
+import { countryOptions, normalizeCountryValue } from "../utils/countryOptions";
 
 const SocialCard = ({
   icon,
@@ -145,7 +146,7 @@ const CreaterAccount = () => {
         if (isMounted && data) {
           setFirstName(data.first_nmae || "");
           setLastName(data.last_name || "");
-          setCountry(data.country || "");
+          setCountry(normalizeCountryValue(data.country || ""));
           setServices(data.role || "creator");
           setCity(data.city || "");
           setDescription(data.description || "");
@@ -173,7 +174,7 @@ const CreaterAccount = () => {
       if (isMounted && data) {
         setFirstName(data.first_nmae || "");
         setLastName(data.last_name || "");
-        setCountry(data.country || "");
+        setCountry(normalizeCountryValue(data.country || ""));
         setServices(data.role || "creator");
         setCity(data.city || "");
         setDescription(data.description || "");
@@ -248,13 +249,7 @@ const CreaterAccount = () => {
     { value: "agency", label: "Agency" },
   ];
 
-  const countryOptions = [
-    { value: "pakistan", label: "Pakistan" },
-    { value: "usa", label: "United States" },
-    { value: "uk", label: "United Kingdom" },
-    { value: "uae", label: "United Arab Emirates" },
-    { value: "india", label: "India" },
-  ];
+  const countryValue = normalizeCountryValue(country);
   return (
     <>
       <UserHeader />
@@ -362,7 +357,7 @@ const CreaterAccount = () => {
                   </label>
                   <CustomDropdown
                     options={countryOptions}
-                    value={country}
+                    value={countryValue}
                     onChange={isViewing ? () => {} : setCountry}
                     placeholder="Select"
                   />
