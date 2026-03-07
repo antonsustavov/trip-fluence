@@ -31,14 +31,10 @@ function RequireAuth({ children }) {
       setStatus(session ? 'authed' : 'unauth');
     }
     getInitial();
-    const { data: subscription } = supabase.auth.onAuthStateChange((_event, session) => {
-      if (!active) return;
-      setStatus(session ? 'authed' : 'unauth');
-    });
-    return () => { active = false; subscription?.subscription?.unsubscribe?.(); };
+    return () => { active = false; };
   }, []);
 
-  if (status === 'loading') return null;
+  if (status === 'loading') return <div className="min-h-screen" />;
   if (status === 'authed') return children;
   const next = encodeURIComponent(location.pathname + location.search);
   return <Navigate to={`/login?next=${next}`} replace />;
@@ -51,7 +47,9 @@ function RequireRole({ children, role }) {
 
   useEffect(() => {
     let active = true;
-    async function loadRole(session) {
+    async function getInitial() {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (!active) return;
       if (!session?.user?.id) {
         setUserRole('');
         setStatus('unauth');
@@ -66,20 +64,11 @@ function RequireRole({ children, role }) {
       setUserRole(data?.role || '');
       setStatus('authed');
     }
-    async function getInitial() {
-      const { data: { session } } = await supabase.auth.getSession();
-      if (!active) return;
-      await loadRole(session);
-    }
     getInitial();
-    const { data: subscription } = supabase.auth.onAuthStateChange(async (_event, session) => {
-      if (!active) return;
-      await loadRole(session);
-    });
-    return () => { active = false; subscription?.subscription?.unsubscribe?.(); };
+    return () => { active = false; };
   }, []);
 
-  if (status === 'loading') return null;
+  if (status === 'loading') return <div className="min-h-screen" />;
   if (status === 'unauth') {
     const next = encodeURIComponent(location.pathname + location.search);
     return <Navigate to={`/login?next=${next}`} replace />;
